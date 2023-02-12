@@ -21,7 +21,7 @@ def clean_dataset(data):
 
 def split_data(data, t_index, part):
     train, val = series1[:-20], series1[-20:]
-    return train
+    return val
 
 
 def part_indexing(data):
@@ -58,5 +58,5 @@ for part in part_indexing(df):
     split_data(df, 'weeks', part)
     series1.to_csv('prediction/prediction_'+str(part)+'.csv')
     #n_beats_model(series1, split_data(df, 'weeks', part))
-    split_data(df, 'weeks', part).to_csv('data/train/train_'+str(part))
+    split_data(df, 'weeks', part).to_csv('data/validate/validate_'+str(part)+'.csv')
 

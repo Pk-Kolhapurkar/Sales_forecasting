@@ -36,7 +36,7 @@ def eval_model(model, train, val):
     print("model {} obtains R2 : {:.2f}%".format(model, r2_score(val, forecast)))
 
 
-def n_beats_model(series1 ,train):
+def n_beats_model(series1, train):
     from darts.models import NBEATSModel
     model = NBEATSModel(input_chunk_length=24, output_chunk_length=12, random_state=42)
     model.fit(train, epochs=50, verbose=True);
@@ -57,4 +57,6 @@ for part in part_indexing(df):
     series1 = TimeSeries.from_dataframe(df, 'weeks', part)
     split_data(df, 'weeks', part)
     series1.to_csv('prediction/prediction_'+str(part)+'.csv')
-    n_beats_model(series1, split_data(df, 'weeks', part))
+    #n_beats_model(series1, split_data(df, 'weeks', part))
+    split_data(df, 'weeks', part).to_csv('data/train/train_'+str(part))
+
